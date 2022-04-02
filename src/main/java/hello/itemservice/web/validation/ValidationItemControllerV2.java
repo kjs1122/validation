@@ -55,14 +55,15 @@ public class ValidationItemControllerV2 {
     }
 
 //    @PostMapping("/add")
-    public String addItemV1(@ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
-
-        // 검증 오류 결과를 보관
-        Map<String, String> errors = new HashMap<>();
+    public String addItemV1(
+            @ModelAttribute Item item,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes,
+            Model model) {
 
         // 검증 로직
         if (!StringUtils.hasText(item.getItemName())) {
-            bindingResult.addError(new FieldError("item", "itemName", "상품 이름은 필수 입니다"));
+            bindingResult.addError(new FieldError("item", "itemName", "문자 입력해 주세요"));
         }
 
         if (item.getPrice() == null || item.getPrice() < 1000 || item.getPrice() > 1000000) {
